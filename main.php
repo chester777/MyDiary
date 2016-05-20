@@ -70,8 +70,8 @@
 		</div>
 
 		<div>
-			<? include("read_diary.php") ?>
-			<input type="button" value="일기 수정" onclick="window.location.replace('write_diary.php?mode=update')"\>
+			<? $diaryId = $_GET['diaryId']; include("read_diary.php"); ?>
+			<input type="button" value="일기 수정" onclick="<? echo "window.location.replace('write_diary.php?mode=update&diaryId=$diaryId')" ?>"\>
 		</div>
 		<div>
 			<input type="button" value="새로운 일기 쓰기" onclick="window.location.replace('write_diary.php?mode=new')"\>

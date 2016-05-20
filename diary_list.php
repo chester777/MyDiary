@@ -36,12 +36,14 @@
 			}
 		}
 
-		if( $_GET['redirect'] != "" ) {
-			redirect($_GET['redirect']);
-			echo "window.location.replace('main.php');";
-		}
+		// if( $_GET['redirect'] != "" ) {
+		// 	//redirect($_GET['redirect']);
+		// 	echo "window.location.replace('main.php');";
+		// }
 
 		//fetch diary name
+
+		echo $_SESSION["diaryId"];
 
 		function diaryName($file)
 		{
@@ -61,14 +63,20 @@
 
 		function redirect($file)
 		{
-			$_SESSION["diaryId"] = $file;
+			// unset($_SESSION["diaryId"]);
+			// unset($_SESSION["diaryName"]);
+			// unset($_SESSION["diaryDate"]);
+
+			// $_SESSION["diaryId"] = $file;
 
 			$contents = file("./diary/".$file);
-			$_SESSION["diaryName"] = $contents[0];
+			//$_SESSION["diaryName"] = $contents[0];
 
 			$diaryDate = explode('.', $file);
 			$diaryDate = $diaryDate[0];
-			$_SESSION["diaryDate"] = $diaryDate;
+			// $_SESSION["diaryDate"] = $diaryDate;
+
+			echo "main.php?diaryId=".$file;
 		}
 	?>
 
@@ -95,7 +103,7 @@
 						
 						<tr>
 							<td>
-								<a href="diary_list.php?redirect=true"><? diaryName($file); ?></a>
+								<a href="<?redirect($file);?>"><? diaryName($file); ?></a>
 							</td>
 							<td><?diaryDate($file)?></td>
 						</tr>

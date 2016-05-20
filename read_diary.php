@@ -37,12 +37,16 @@
 			}
 		}
 
-		if( $_SESSION['diaryId'] != "") {
-			$diaryId = $_SESSION['diaryId'];
-			$diaryName = $_SESSION['diaryName'];
-			$diaryDate = $_SESSION['diaryDate'];
+		$diaryId = $_GET['diaryId'];
 
-			$diaryContents = file_get_contents("./diary/".$diaryId);	
+		if( $diaryId != "" ) {
+			$contents = file("./diary/".$diaryId);
+			$diaryName = $contents[0];
+
+			$diaryDate = explode('.', $diaryId);
+			$diaryDate = $diaryDate[0];
+			
+			$diaryContents = file_get_contents("./diary/".$diaryId);
 	?>
 		<table>
 			<tr>
